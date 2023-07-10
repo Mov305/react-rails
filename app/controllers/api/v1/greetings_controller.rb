@@ -1,19 +1,17 @@
 class Api::V1::GreetingsController < ApplicationController
-  before_action :set_greeting, :set_default_format, only: %i[ show update destroy ]
-
+  before_action :set_greeting, :set_default_format, only: %i[show update destroy]
 
   # GET /greetings
   # GET /greetings.json
   def index
     # get a random greeting
-    @greeting = Greeting.order("RANDOM()").first
+    @greeting = Greeting.order('RANDOM()').first
     render json: @greeting
   end
 
   # GET /greetings/1
   # GET /greetings/1.json
-  def show
-  end
+  def show; end
 
   # POST /greetings
   # POST /greetings.json
@@ -44,18 +42,19 @@ class Api::V1::GreetingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_greeting
-      @greeting = Greeting.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def greeting_params
-      params.require(:greeting).permit(:text)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_greeting
+    @greeting = Greeting.find(params[:id])
+  end
 
-    # set the response format to JSON
-    def set_default_format
-      request.format = :json
-    end
+  # Only allow a list of trusted parameters through.
+  def greeting_params
+    params.require(:greeting).permit(:text)
+  end
+
+  # set the response format to JSON
+  def set_default_format
+    request.format = :json
+  end
 end
